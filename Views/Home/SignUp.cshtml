@@ -1,0 +1,30 @@
+﻿@{
+  ViewData["Title"] = "Crear cuenta";
+}
+
+<div class="wrapper vertical-center">
+  <div id="formContent">
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img style="padding-left: 4%;" src="/img/person-plus-fill.svg" id="icon" alt="User Icon" />
+    </div>
+
+    <!-- SignUp Form -->
+    <form>
+      <input type="text" id="usuario" class="fadeIn first" name="usuario" placeholder="usuario" minlength="5" maxlength="20">
+      <input type="password" id="password" class="fadeIn first" name="password" placeholder="contraseña" minlength="5" maxlength="10">
+      <input type="text" id="nombre" class="fadeIn second" name="nombre" placeholder="nombre completo" minlength="10" maxlength="50">
+      <input type="hidden" name="signup" value="true">
+      <input type="submit" class="fadeIn fourth" value="Sign Up">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <p>
+        ¿Ya tienes una cuenta?
+        <a class="underlineHover" asp-area="" asp-controller="Home" asp-action="Login"> LogIn</a>
+      </p>
+    </div>
+  </div>
+</div>
+

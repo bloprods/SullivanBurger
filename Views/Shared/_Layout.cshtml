@@ -8,16 +8,24 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png">
 
     <!-- CSS here -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/themify-icons.css">
-    <link rel="stylesheet" href="css/slicknav.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/themify-icons.css">
+    <link rel="stylesheet" href="/css/slicknav.css">
+    <link rel="stylesheet" href="/css/style.css" asp-append-version="true">
+  @if (ViewData["Title"] == "Iniciar sesión" || ViewData["Title"] == "Crear cuenta")
+    {
+    <link rel="stylesheet" href="/css/login.css">
+    }
+  @if (ViewData["Title"] == "Gestión de usuarios")
+  {
+    <link rel="stylesheet" href="/css/other.css">
+  }
 </head>
 
 <body>
@@ -31,18 +39,18 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a class="@(ViewData["Title"] == "Sullivan Burger - Web Oficial" ? "active" : null)" href="index.html">home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="menu.html">Menú</a></li>
-                                        <li><a href="contact.html">Contacto</a></li>
+                                        <li><a class="@(ViewData["Title"] == "Sullivan Burger - Web Oficial" ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li><a class="@(ViewData["Title"] == "Sobre nosotros" ? "active" : null)" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                                        <li><a class="@(ViewData["Title"] == "Productos" ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Products">Productos</a></li>
+                                        <li><a class="@(ViewData["Title"] == "Contáctanos" ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Contact">Contacto</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
                         <div class="col-xl-2 col-lg-2">
                             <div class="logo-img">
-                                <a href="index.html">
-                                    <img src="img/logo.png" alt="">
+                                <a asp-area="" asp-controller="Home" asp-action="Index">
+                                    <img src="/img/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -56,12 +64,12 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="login.html">
+                                            <a asp-area="" asp-controller="Home" asp-action="Login">
                                                 <i class="fa fa-user"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="usersAdmin.html">
+                                            <a asp-area="" asp-controller="Home" asp-action="UserManagement">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         </li>
@@ -84,114 +92,117 @@
 
     @RenderBody()
 
+  @if (ViewData["PageType"] != "admin")
+  {
     <!-- footer_start  -->
     <footer class="footer">
-        <div class="footer_top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-4 col-md-6 col-lg-4">
-                        <div class="footer_widget text-center ">
-                            <h3 class="footer_title pos_margin">
-                                Sevilla
-                            </h3>
-                            <p>
-                                Avenida Virgen del Rocío, <br>
-                                Nº3, 41804 Olivares <br>
-                                <a href="#">info@sullivanburger.com</a>
-                            </p>
-                            <a class="number" href="#">+34 689 325 436</a>
+      <div class="footer_top">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4 col-md-6 col-lg-4">
+              <div class="footer_widget text-center ">
+                <h3 class="footer_title pos_margin">
+                  Sevilla
+                </h3>
+                <p>
+                  Avenida Virgen del Rocío, <br>
+                  Nº3, 41804 Olivares <br>
+                  <a href="#">info@sullivanburger.com</a>
+                </p>
+                <a class="number" href="#">+34 689 325 436</a>
 
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 col-lg-4">
-                        <div class="footer_widget text-center ">
-                            <h3 class="footer_title pos_margin">
-                                Málaga
-                            </h3>
-                            <p>
-                                Calle Gomera,<br>
-                                Nº6, 29640 Fuengirola<br>
-                                <a href="#">info@sullivanburger.com</a>
-                            </p>
-                            <a class="number" href="#">+34 689 325 436</a>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-lg-4">
+              <div class="footer_widget text-center ">
+                <h3 class="footer_title pos_margin">
+                  Málaga
+                </h3>
+                <p>
+                  Calle Gomera,<br>
+                  Nº6, 29640 Fuengirola<br>
+                  <a href="#">info@sullivanburger.com</a>
+                </p>
+                <a class="number" href="#">+34 689 325 436</a>
 
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-12 col-lg-4">
-                        <div class="footer_widget">
-                            <h3 class="footer_title">
-                                Mantente informado
-                            </h3>
-                            <form action="#" class="newsletter_form">
-                                <input type="text" placeholder="Introduce tu email">
-                                <button type="submit">Suscribirse</button>
-                            </form>
-                            <p class="newsletter_text">
-                                ¡Mantente conectado con nosotros para obtener oferta exclusiva!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-lg-4">
-                        <div class="socail_links text-center">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-instagram"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-twitter-alt"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="ti-facebook"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i class="fa fa-google-plus"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+              </div>
             </div>
-        </div>
-        <div class="copy-right_text">
-            <div class="container">
-                <div class="footer_border"></div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <p class="copy_right text-center">
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | Web creada
-                            con <i class="fa fa-heart-o" style="color: orange;" aria-hidden="true"></i> por Bruno López
-                            Rodríguez</a>
-                        </p>
-                    </div>
-                </div>
+            <div class="col-xl-4 col-md-12 col-lg-4">
+              <div class="footer_widget">
+                <h3 class="footer_title">
+                  Mantente informado
+                </h3>
+                <form action="#" class="newsletter_form">
+                  <input type="text" placeholder="Introduce tu email">
+                  <button type="submit">Suscribirse</button>
+                </form>
+                <p class="newsletter_text">
+                  ¡Mantente conectado con nosotros para obtener oferta exclusiva!
+                </p>
+              </div>
             </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-lg-4">
+              <div class="socail_links text-center">
+                <ul>
+                  <li>
+                    <a href="#">
+                      <i class="ti-instagram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="ti-twitter-alt"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="ti-facebook"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="fa fa-google-plus"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div class="copy-right_text">
+      <div class="container">
+        <div class="footer_border"></div>
+        <div class="row">
+          <div class="col-xl-12">
+            <p class="copy_right text-center">
+              Copyright &copy;
+              <script>document.write(new Date().getFullYear());</script> All rights reserved | Web creada
+              con <i class="fa fa-heart-o" style="color: orange;" aria-hidden="true"></i> por Bruno López
+              Rodríguez
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     </footer>
     <!-- footer_end  -->
-
+  }
+    
     <span>
         <!-- JS here -->
-        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-        <script src="js/vendor/jquery-1.12.4.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/owl.carousel.min.js"></script>
-        <script src="js/isotope.pkgd.min.js"></script>
-        <script src="js/jquery.counterup.min.js"></script>
-        <script src="js/wow.min.js"></script>
-        <script src="js/jquery.slicknav.min.js"></script>
-        <script src="js/jquery.magnific-popup.min.js"></script>
-        <script src="js/main.js"></script>
+        <script src="/js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="/js/vendor/jquery-1.12.4.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/owl.carousel.min.js"></script>
+        <script src="/js/isotope.pkgd.min.js"></script>
+        <script src="/js/jquery.counterup.min.js"></script>
+        <script src="/js/wow.min.js"></script>
+        <script src="/js/jquery.slicknav.min.js"></script>
+        <script src="/js/jquery.magnific-popup.min.js"></script>
+        <script src="/js/main.js"></script>
     </span>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
