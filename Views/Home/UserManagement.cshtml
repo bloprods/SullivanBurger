@@ -1,0 +1,99 @@
+﻿@{
+  ViewData["Title"] = "Gestión de usuarios";
+  ViewData["PageType"] = "admin";
+}
+
+<div id="usersTable" class="container-xl m-5">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-5">
+            <h2>User <b>Management</b></h2>
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Rol</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td><a href="#"><img src="/img/users/user.png" class="avatar" alt="Avatar" width="32px"> bruno</a></td>
+            <td>Bruno López Rodríguez</td>
+            <td>Admin</td>
+            <td><span class="status text-success">•</span> Activo</td>
+            <td>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Settings"><i class="fa fa-pencil"></i></a>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td><a href="#"><img src="/img/users/user.png" class="avatar" alt="Avatar" width="32px"> patica1994</a></td>
+            <td>Joaquín Fernández Ennove</td>
+            <td>Client</td>
+            <td><span class="status text-success">•</span> Activo</td>
+            <td>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Settings"><i class="fa fa-pencil"></i></a>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td><a href="#"><img src="/img/users/user.png" class="avatar" alt="Avatar" width="32px"> jorge_javier</a></td>
+            <td>Jorge Javier Vázquez</td>
+            <td>Client</td>
+            <td><span class="status text-danger">•</span> Suspendedido</td>
+            <td>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Settings"><i class="fa fa-pencil"></i></a>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td><a href="#"><img src="/img/users/user.png" class="avatar" alt="Avatar" width="32px"> jesusjb</a></td>
+            <td>Jesús García Gelo</td>
+            <td>Reviewer</td>
+            <td><span class="status text-success">•</span> Activo</td>
+            <td>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Settings"><i class="fa fa-pencil"></i></a>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td><a href="#"><img src="/img/users/user.png" class="avatar" alt="Avatar" width="32px"> paulili</a></td>
+            <td>Paula Gomera Ellie</td>
+            <td>Moderator</td>
+            <td><span class="status text-warning">•</span> Inactivo</td>
+            <td>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Settings"><i class="fa fa-pencil"></i></a>
+              <a href="#" title="" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="clearfix mb-5">
+        <div class="hint-text">Mostrando <b>5</b> de <b>25</b> resultados</div>
+        <ul class="pagination">
+          <li class="page-item"><a href="#" class="page-link">Anterior</a></li>
+          <li class="page-item"><a href="#" class="page-link">1</a></li>
+          <li class="page-item"><a href="#" class="page-link">2</a></li>
+          <li class="page-item active"><a href="#" class="page-link">3</a></li>
+          <li class="page-item"><a href="#" class="page-link">4</a></li>
+          <li class="page-item"><a href="#" class="page-link">5</a></li>
+          <li class="page-item"><a href="#" class="page-link">Siguiente</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
