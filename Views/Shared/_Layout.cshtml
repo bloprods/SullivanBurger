@@ -64,12 +64,12 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a asp-area="" asp-controller="Home" asp-action="Login">
+                                            <a asp-area="" asp-controller="Users" asp-action="Login">
                                                 <i class="fa fa-user"></i>
                                             </a>
                                         </li>
                                         <li>
-                                            <a asp-area="" asp-controller="Home" asp-action="UserManagement">
+                                            <a asp-area="" asp-controller="Users" asp-action="Management">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         </li>
@@ -189,8 +189,27 @@
     </div>
     </footer>
     <!-- footer_end  -->
+  } else
+  {
+    <footer class="footer fixed-bottom">
+      <div class="copy-right_text">
+        <div class="container">
+          <div class="footer_border"></div>
+          <div class="row">
+            <div class="col-xl-12">
+              <p class="copy_right text-center">
+                Copyright &copy;
+                <script>document.write(new Date().getFullYear());</script> All rights reserved | Web creada
+                con <i class="fa fa-heart-o" style="color: orange;" aria-hidden="true"></i> por Bruno López
+                Rodríguez
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   }
-    
+
     <span>
         <!-- JS here -->
         <script src="/js/vendor/modernizr-3.5.0.min.js"></script>

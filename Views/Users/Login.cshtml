@@ -1,4 +1,6 @@
-﻿@{
+﻿@model LoginViewModel
+
+@{
   ViewData["Title"] = "Iniciar sesión";
 }
 
@@ -10,21 +12,20 @@
     </div>
 
     <!-- Login Form -->
-    <form>
-      <input type="text" id="usuario" class="fadeIn second" name="usuario" placeholder="usuario" minlength="5" maxlength="20">
-      <input type="password" id="password" class="fadeIn third" name="password" placeholder="contraseña" minlength="5" maxlength="10">
+    <form method="post">
+      <input type="text" asp-for="Email" id="email" class="fadeIn second" name="email" placeholder="email" minlength="5" maxlength="60">
+      <input type="password" asp-for="Password" id="password" class="fadeIn third" name="password" placeholder="contraseña" minlength="8" maxlength="32">
       <input type="hidden" name="login" value="true">
       <input type="submit" class="fadeIn fourth" value="Log In">
+      <p class="text-danger ml-4 mr-4">@ViewBag.LoginError</p>
     </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <p>
         ¿No tienes una cuenta?
-        <a class="underlineHover" asp-area="" asp-controller="Home" asp-action="SignUp"> Sign Up</a>
+        <a class="underlineHover" asp-area="" asp-controller="Users" asp-action="SignUp"> Sign Up</a>
       </p>
     </div>
   </div>
-</div>
-
 </div>

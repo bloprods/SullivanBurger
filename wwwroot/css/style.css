@@ -2899,6 +2899,10 @@ h3 {
   height: 100% !important;
 }
 
-#usersTable {
-  margin-top: 80px !important;
+.usersAdmin {
+  margin-top: 150px !important;
+}
+
+.modal-backdrop {
+  z-index: -1;
 }
