@@ -6,8 +6,6 @@ namespace SullivanBurger.Models
   public class Producto
   {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Id { get; set; }
     [Required]
     [StringLength(50)]
     public string Nombre { get; set; }
@@ -23,7 +21,7 @@ namespace SullivanBurger.Models
     public int Stock { get; set; } = 0;
     [Required]
     [ForeignKey("Distribuidor")]
-    public int DistribuidorId { get; set; }
+    public string DistribuidorId { get; set; }
     public Distribuidor Distribuidor { get; set; }
   }
 }

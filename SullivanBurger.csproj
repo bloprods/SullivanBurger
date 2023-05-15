@@ -21,4 +21,9 @@
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\products\complements\" />
+    <Folder Include="wwwroot\img\products\drinks\" />
+  </ItemGroup>
+
 </Project>

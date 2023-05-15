@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SullivanBurger.Data;
 
@@ -11,9 +12,11 @@ using SullivanBurger.Data;
 namespace SullivanBurger.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230513191233_CambioNombreTablas")]
+    partial class CambioNombreTablas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -24,11 +27,18 @@ namespace SullivanBurger.Migrations
 
             modelBuilder.Entity("SullivanBurger.Models.Distribuidor", b =>
                 {
-                    b.Property<string>("Nombre")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Direccion")
+                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Direccion")
+                    b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -37,29 +47,35 @@ namespace SullivanBurger.Migrations
                         .HasMaxLength(9)
                         .HasColumnType("int");
 
-                    b.HasKey("Nombre");
+                    b.HasKey("Id");
 
                     b.ToTable("Distribuidores");
                 });
 
             modelBuilder.Entity("SullivanBurger.Models.Producto", b =>
                 {
-                    b.Property<string>("Nombre")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(400)
                         .HasColumnType("nvarchar(400)");
 
-                    b.Property<string>("DistribuidorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("DistribuidorId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Imagen")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<float>("Precio")
                         .HasColumnType("real");
@@ -71,7 +87,7 @@ namespace SullivanBurger.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Nombre");
+                    b.HasKey("Id");
 
                     b.HasIndex("DistribuidorId");
 
