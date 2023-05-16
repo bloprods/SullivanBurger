@@ -17,12 +17,13 @@
     <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/themify-icons.css">
     <link rel="stylesheet" href="/css/slicknav.css">
+    <link rel="stylesheet" href="/css/toastr.min.css">
     <link rel="stylesheet" href="/css/style.css" asp-append-version="true">
   @if (ViewData["Title"] == "Iniciar sesión" || ViewData["Title"] == "Crear cuenta")
     {
     <link rel="stylesheet" href="/css/login.css">
     }
-  @if (ViewData["Title"] == "Gestión de usuarios")
+  @if (ViewData["PageType"] == "admin")
   {
     <link rel="stylesheet" href="/css/other.css">
   }
@@ -69,8 +70,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a asp-area="" asp-controller="Users" asp-action="Management">
-                                                <i class="fa fa-edit"></i>
+                                            <a asp-area="" asp-controller="Home" asp-action="Admin">
+                                                <i class="fa fa-gear"></i>
                                             </a>
                                         </li>
                                     </ul>
@@ -89,7 +90,7 @@
         </div>
     </header>
     <!-- header-end -->
-
+    <partial name="_Toast" />
     @RenderBody()
 
   @if (ViewData["PageType"] != "admin")

@@ -41,13 +41,56 @@ namespace SullivanBurger.Controllers
         }
       }
 
-      
       return View();
     }
 
     //GET
     public IActionResult SignUp()
     {
+      return View();
+    }
+
+    //POST
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public IActionResult SignUp(Usuario obj)
+    {
+      if (ModelState.IsValid)
+      {
+        _db.Usuarios.Add(obj);
+        _db.SaveChanges();
+        return RedirectToAction("Login");
+      }
+      return View();
+    }
+
+
+    //GET
+    public IActionResult Management()
+    {
+      IEnumerable<Usuario> objUsersList = _db.Usuarios;
+      return View(objUsersList);
+    }
+
+    //GET
+    public IActionResult Create()
+    {
+      return View();
+    }
+
+    //POST
+    [HttpPost]
+    public IActionResult Create(Usuario obj)
+    {
+      if (ModelState.IsValid)
+      {
+        TempData["success"] = "Se ha creado el usuario correctamente.";
+        _db.Usuarios.Add(obj);
+        _db.SaveChanges();
+        return RedirectToAction("Management");
+      }
+
+      TempData["error"] = "true";
       return View();
     }
 
@@ -73,30 +116,16 @@ namespace SullivanBurger.Controllers
     [HttpPost]
     public IActionResult Edit(Usuario obj)
     {
-      TempData["Management"] = "Se ha editado el usuario correctamente.";
-      _db.Usuarios.Update(obj);
-        _db.SaveChanges();
-        return RedirectToAction("Management");
-    }
-
-    //POST
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public IActionResult SignUp(Usuario obj)
-    {
       if (ModelState.IsValid)
       {
-        _db.Usuarios.Add(obj);
+        TempData["success"] = "Se ha editado el usuario correctamente";
+        _db.Usuarios.Update(obj);
         _db.SaveChanges();
-        return RedirectToAction("Login");
+        return RedirectToAction("Management");
       }
-      return View();
-    }
 
-    public IActionResult Management()
-    {
-      IEnumerable<Usuario> objUsersList = _db.Usuarios;
-      return View(objUsersList);
+      TempData["error"] = "true";
+      return View();
     }
 
     //GET
@@ -113,7 +142,7 @@ namespace SullivanBurger.Controllers
         return NotFound();
       } else
       {
-        TempData["Management"] = "Se ha eliminado el usuario con email " + userFromDb.Email;
+        TempData["success"] = "Se ha eliminado el usuario con email " + userFromDb.Email;
         _db.Usuarios.Remove(userFromDb);
         _db.SaveChanges();
       }

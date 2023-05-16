@@ -21,6 +21,7 @@ namespace SullivanBurger.Controllers
 
     public IActionResult Index()
     {
+      ViewBag.Hamburguesas = _productsController.getHamburgesas();
       return View();
     }
 
@@ -55,6 +56,10 @@ namespace SullivanBurger.Controllers
 
     public IActionResult UserManagement()
     {
+      return View();
+    }
+
+    public IActionResult Admin() { 
       return View();
     }
 

@@ -41,126 +41,43 @@
     </div>
 </div>
 <!-- slider_area_end -->
-
+<!-- best_burgers_area_start  -->
 <div class="best_burgers_area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section_title text-center mb-80">
-                    <span>Hamburguesas</span>
-                    <h3>Las Mejores Hamburguesas</h3>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="section_title text-center mb-80">
+          <span>Hamburguesas</span>
         </div>
-        <div class="row">
-            <div class="col-xl-6 col-md-6 col-lg-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/1.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Awebo</h3>
-                        <p>Pulled pork con bacon, queso, aros de cebolla, lechuga y guacamole.</p>
-                        <span>7,99€</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/2.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Sullivan</h3>
-                        <p>La estrella de la casa, ternera madurada, ingredientes secretos.</p>
-                        <span>7,00€</span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/3.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Esencial</h3>
-                        <p>Ternera, bacon, queso y ketchup.</p>
-                        <span>4,99€</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-6 col-md-6 col-lg-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/4.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Pecado Carnal</h3>
-                        <p>Utilizando ternera y pulled pork, hamburguesa para carnívoros.</p>
-                        <span>7,50€</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/5.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Texas</h3>
-                        <p>Ternera con lechuga, bacon, queso, cebolla crujiente y salsa barbacoa.</p>
-                        <span>5,99€</span>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/6.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Ibérica</h3>
-                        <p>Black Angus con jamón ibérico, queso viejo y salmorejo en pan artesano.</p>
-                        <span>12,50€</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/7.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Vegana</h3>
-                        <p>Hamburguesa 100% vegetal con guacamole, cebolla, tomate y lechuga en pan de cereales.</p>
-                        <span>9,00€</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="single_delicious d-flex align-items-center">
-                    <div class="thumb">
-                        <img src="/img/burger/8.png" alt="">
-                    </div>
-                    <div class="info">
-                        <h3>Crispy Chicken</h3>
-                        <p>Hamburguesa crujiente de pollo en pan artesano con bacon, lechuga y salsa alioli.</p>
-                        <span>5,50€</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="iteam_links">
-                    <a class="boxed-btn5" href="Menu.html">Más productos</a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="row">
+      @foreach (var obj in ViewBag.Hamburguesas)
+      {
+        <div class="col-xl-6 col-md-6 col-lg-6">
+          <div class="single_delicious d-flex align-items-center">
+            <div class="thumb">
+              <img src="/img/products/burger/@obj.Imagen" alt="@obj.Nombre img">
+            </div>
+            <div class="info">
+              <h3>@obj.Nombre</h3>
+              <p>@obj.Descripcion</p>
+              <span>@string.Format("{0:0.00}", obj.Precio)€</span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="iteam_links">
+          <a class="boxed-btn5" href="Menu.html">Más productos</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+<!-- best_burgers_area_end  -->
 <!-- features_room_startt -->
 <div class="Burger_President_area">
     <div class="Burger_President_here">

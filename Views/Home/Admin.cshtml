@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Usuario>
+
+@{
+  ViewData["Title"] = "Panel de administrador";
+  ViewData["PageType"] = "admin";
+}
+
+<section class="usersAdmin m-5">
+  <h1>Panel de <b>Administrador</b></h1>
+  <div class="d-flex flex-row justify-content-left text-center">
+    <article class="card" style="width: 18rem;">
+      <img class="card-img-top" src="/img/adminPanel/users.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Usuarios</h5>
+        <p class="card-text">Gestiona los usuarios de la página web.</p>
+        <a asp-controller="Users" asp-action="Management" class="btn btn-primary">Acceder</a>
+      </div>
+    </article>
+    <article class="card ml-5 mr-5" style="width: 18rem;">
+      <img class="card-img-top" src="/img/adminPanel/products.png" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Productos</h5>
+        <p class="card-text">Gestiona los productos de la página web.</p>
+        <a asp-controller="Products" asp-action="Management" class="btn btn-primary">Acceder</a>
+      </div>
+    </article>
+
+    <article class="card" style="width: 18rem;">
+      <img class="card-img-top" src="/img/adminPanel/providers.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Distribuidores</h5>
+        <p class="card-text">Gestiona los distribuidores de la página web.</p>
+        <a asp-controller="Providers" asp-action="Management" class="btn btn-primary">Acceder</a>
+      </div>
+    </article>
+
+  </div>
+
+</section>
+
+
