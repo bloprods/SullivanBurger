@@ -36,8 +36,8 @@
         <td>@obj.Rol</td>
         <td>@obj.Puntos</td>
         <td>
-          <a title="Editar" asp-controller="Users" asp-action="Edit" asp-route-email="@obj.Email"><i class="fa fa-pencil"></i></a>
-          <a title="Eliminar" asp-controller="Users" asp-action="Delete" asp-route-email="@obj.Email"><i class="fa fa-trash"></i></a>
+          <a title="Editar" asp-controller="Users" asp-action="Edit" asp-route-id="@obj.Email"><i class="fa fa-pencil"></i></a>
+          <a title="Eliminar" asp-controller="Users" asp-action="Delete" asp-route-id="@obj.Email"><i class="fa fa-trash"></i></a>
         </td>
       </tr>
     }

@@ -13,14 +13,17 @@ namespace SullivanBurger.Controllers
     public class ProductsController : Controller
     {
       private readonly ApplicationDbContext _db;
+      private readonly IHttpContextAccessor _context;
 
-      public ProductsController(ApplicationDbContext db)
-      {
-          _db = db;
-      }
 
-      // GET: Products
-      public async Task<IActionResult> Management()
+    public ProductsController(ApplicationDbContext db, IHttpContextAccessor context)
+    {
+      _db = db;
+      _context = context;
+    }
+
+    // GET: Products
+    public async Task<IActionResult> Management()
       {
           var applicationDbContext = _db.Productos.Include(p => p.Distribuidor);
           return View(await applicationDbContext.ToListAsync());

@@ -1,16 +1,16 @@
 
 
 /*Usuarios*/
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('usuario1@example.com', 'contrasena1', 'Juan', 'Pérez', '123456789', 'Calle Falsa 123', 'cliente', 50);
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('admin1@example.com', 'contrasena2', 'María', 'Gómez', '234567890', 'Avenida Real 456', 'admin', 0);
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('repartidor1@example.com', 'contrasena3', 'Pedro', 'López', '345678901', 'Plaza Mayor 789', 'repartidor', 20);
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('usuario2@example.com', 'contrasena4', 'Ana', 'García', '456789012', 'Calle Principal 321', 'cliente', 100);
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('admin2@example.com', 'contrasena5', 'Pablo', 'Hernández', '567890123', 'Avenida del Parque 654', 'admin', 0);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('usuario1@example.com', 'contrasena1', 'Juan', 'Pérez', '687677617', 'Calle Falsa 123', 'cliente', 50);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('admin1@example.com', 'contrasena2', 'María', 'Gómez', '688778963', 'Avenida Real 456', 'admin', 0);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('repartidor1@example.com', 'contrasena3', 'Pedro', 'López', '666543684', 'Plaza Mayor 789', 'repartidor', 20);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('usuario2@example.com', 'contrasena4', 'Ana', 'García', '640581180', 'Calle Principal 321', 'cliente', 100);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('admin2@example.com', 'contrasena5', 'Pablo', 'Hernández', '645632752', 'Avenida del Parque 654', 'admin', 0);
 INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('repartidor2@example.com', 'contrasena6', 'Lucía', 'Martínez', '678901234', 'Calle del Sol 987', 'repartidor', 15);
 INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('usuario3@example.com', 'contrasena7', 'Carlos', 'Fernández', '789012345', 'Avenida de la Libertad 567', 'cliente', 75);
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('admin3@example.com', 'contrasena8', 'Sofía', 'Ruiz', '890123456', 'Plaza de la Constitución 345', 'admin', 0);
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('repartidor3@example.com', 'contrasena9', 'Marcelo', 'Sánchez', '901234567', 'Calle del Mar 876', 'repartidor', 10);
-INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('usuario4@example.com', 'contrasena10', 'Luisa', 'López', '012345678', 'Avenida Primavera 789', 'cliente', 200);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('admin3@example.com', 'contrasena8', 'Sofía', 'Ruiz', '693419914', 'Plaza de la Constitución 345', 'admin', 0);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('repartidor3@example.com', 'contrasena9', 'Marcelo', 'Sánchez', '742797741', 'Calle del Mar 876', 'repartidor', 10);
+INSERT INTO Usuarios (email, password, nombre, apellidos, telefono, direccion, rol, puntos) VALUES ('usuario4@example.com', 'contrasena10', 'Luisa', 'López', '664021320', 'Avenida Primavera 789', 'cliente', 200);
 
 /*Distribuidores*/
 INSERT INTO Distribuidores (nombre, direccion, telefono) VALUES ('SullivanBurger', 'Avenida Virgen del Rocío 3', '689325436');

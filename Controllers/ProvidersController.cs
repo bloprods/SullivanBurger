@@ -12,30 +12,33 @@ namespace SullivanBurger.Controllers
 {
     public class ProvidersController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _db;
+        private readonly IHttpContextAccessor _context;
 
-        public ProvidersController(ApplicationDbContext context)
+
+        public ProvidersController(ApplicationDbContext db, IHttpContextAccessor context)
         {
-            _context = context;
+          _db = db;
+          _context = context;
         }
 
         // GET: Providers
         public async Task<IActionResult> Management()
         {
-              return _context.Distribuidores != null ? 
-                          View(await _context.Distribuidores.ToListAsync()) :
+              return _db.Distribuidores != null ? 
+                          View(await _db.Distribuidores.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.Distribuidores'  is null.");
         }
 
         // GET: Providers/Details/5
         public async Task<IActionResult> Details(string id)
         {
-            if (id == null || _context.Distribuidores == null)
+            if (id == null || _db.Distribuidores == null)
             {
                 return NotFound();
             }
 
-            var distribuidor = await _context.Distribuidores
+            var distribuidor = await _db.Distribuidores
                 .FirstOrDefaultAsync(m => m.Nombre == id);
             if (distribuidor == null)
             {
@@ -62,8 +65,9 @@ namespace SullivanBurger.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(distribuidor);
-                await _context.SaveChangesAsync();
+                _db.Add(distribuidor);
+                await _db.SaveChangesAsync();
+                TempData["success"] = "Se ha creado el distribuidor correctamente";
                 return RedirectToAction("Management");
             }
             return View(distribuidor);
@@ -72,12 +76,12 @@ namespace SullivanBurger.Controllers
         // GET: Providers/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            if (id == null || _context.Distribuidores == null)
+            if (id == null || _db.Distribuidores == null)
             {
                 return NotFound();
             }
 
-            var distribuidor = await _context.Distribuidores.FindAsync(id);
+            var distribuidor = await _db.Distribuidores.FindAsync(id);
             if (distribuidor == null)
             {
                 return NotFound();
@@ -103,8 +107,10 @@ namespace SullivanBurger.Controllers
             {
                 try
                 {
-                    _context.Update(distribuidor);
-                    await _context.SaveChangesAsync();
+                    _db.Update(distribuidor);
+                    await _db.SaveChangesAsync();
+                    TempData["success"] = "Se ha editado el distribuidor correctamente";
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -125,12 +131,12 @@ namespace SullivanBurger.Controllers
         // GET: Providers/Delete/5
         public async Task<IActionResult> Delete(string id)
         {
-            if (id == null || _context.Distribuidores == null)
+            if (id == null || _db.Distribuidores == null)
             {
                 return NotFound();
             }
 
-            var distribuidor = await _context.Distribuidores
+            var distribuidor = await _db.Distribuidores
                 .FirstOrDefaultAsync(m => m.Nombre == id);
             if (distribuidor == null)
             {
@@ -145,23 +151,25 @@ namespace SullivanBurger.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            if (_context.Distribuidores == null)
+            if (_db.Distribuidores == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.Distribuidores'  is null.");
             }
-            var distribuidor = await _context.Distribuidores.FindAsync(id);
+            var distribuidor = await _db.Distribuidores.FindAsync(id);
             if (distribuidor != null)
             {
-                _context.Distribuidores.Remove(distribuidor);
+                _db.Distribuidores.Remove(distribuidor);
             }
             
-            await _context.SaveChangesAsync();
-                return RedirectToAction("Management");
+            await _db.SaveChangesAsync();
+            TempData["success"] = "Se ha eliminado el distribuidor correctamente";
+
+            return RedirectToAction("Management");
         }
 
         private bool DistribuidorExists(string id)
         {
-          return (_context.Distribuidores?.Any(e => e.Nombre == id)).GetValueOrDefault();
+          return (_db.Distribuidores?.Any(e => e.Nombre == id)).GetValueOrDefault();
         }
     }
 }

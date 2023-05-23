@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using System.Text.Json;
+@inject IHttpContextAccessor context;
+@{
+  string? jsonString = context.HttpContext.Session.GetString("Usuario");
+  bool logeado = false;
+  Usuario? userLogeado = new Usuario();
+  if (jsonString != null)
+  {
+    userLogeado = JsonSerializer.Deserialize<Usuario>(jsonString);
+    logeado = true;
+  }
+}
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -23,7 +35,7 @@
     {
     <link rel="stylesheet" href="/css/login.css">
     }
-  @if (ViewData["PageType"] == "admin")
+  @if (ViewData["PageType"] == "admin" || ViewData["PageType"] == "user")
   {
     <link rel="stylesheet" href="/css/other.css">
   }
@@ -59,21 +71,39 @@
                             <div class="book_room">
                                 <div class="socail_links">
                                     <ul>
+                                      @if (logeado){
+                                        <li>
+                                            <a asp-controller="Users" asp-action="EditProfile" asp-route-id="@userLogeado.Email">
+                                              @userLogeado.Nombre
+                                            </a>
+                                        </li>
+                                        
+                                        if(userLogeado.esAdmin()){
+                                          <li>
+                                            <a asp-area="" asp-controller="Home" asp-action="Admin">
+                                                <i class="fa fa-gear"></i>
+                                            </a>
+                                          </li>
+                                        }
+                                        <li>
+                                            <a asp-area="" asp-controller="Users" asp-action="Logout">
+                                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                                            </a>
+                                          </li>
+                                      }
                                         <li>
                                             <a href="https://www.instagram.com/sullivanburger/">
                                                 <i class="fa fa-instagram"></i>
                                             </a>
                                         </li>
+                                        @if (!logeado){
                                         <li>
                                             <a asp-area="" asp-controller="Users" asp-action="Login">
                                                 <i class="fa fa-user"></i>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a asp-area="" asp-controller="Home" asp-action="Admin">
-                                                <i class="fa fa-gear"></i>
-                                            </a>
-                                        </li>
+                                        }
+                                        
                                     </ul>
                                 </div>
                                 <div class="book_btn d-none d-xl-block">
@@ -133,12 +163,9 @@
                 <h3 class="footer_title">
                   Mantente informado
                 </h3>
-                <form action="#" class="newsletter_form">
-                  <input type="text" placeholder="Introduce tu email">
-                  <button type="submit">Suscribirse</button>
-                </form>
                 <p class="newsletter_text">
-                  ¡Mantente conectado con nosotros para obtener oferta exclusiva!
+                  ¡Mantente conectado con nosotros para obtener oferta exclusiva, 
+                  puedes seguirnos en nuestras redes sociales para estar al tanto de todo!
                 </p>
               </div>
             </div>

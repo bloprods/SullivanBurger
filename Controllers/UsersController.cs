@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
 using SullivanBurger.Data;
 using SullivanBurger.Models;
 
@@ -7,9 +9,13 @@ namespace SullivanBurger.Controllers
     public class UsersController : Controller
   {
     private readonly ApplicationDbContext _db;
+    private readonly IHttpContextAccessor _context;
 
-    public UsersController(ApplicationDbContext db) {
+
+    public UsersController(ApplicationDbContext db, IHttpContextAccessor context)
+    {
       _db = db;
+      _context = context;
     }
 
     //GET
@@ -37,6 +43,8 @@ namespace SullivanBurger.Controllers
           ViewBag.LoginError = "Las credenciales no son correctas. Por favor, vuelva a intentarlo.";
         } else
         {
+          TempData["success"] = "Has iniciado sesión correctamente";
+          _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(userFromDb));
           return RedirectToAction("Index", "Home");
         }
       }
@@ -59,11 +67,20 @@ namespace SullivanBurger.Controllers
       {
         _db.Usuarios.Add(obj);
         _db.SaveChanges();
+        TempData["success"] = "Se ha registrado correctamente";
+
         return RedirectToAction("Login");
       }
       return View();
     }
 
+    //GET
+    public IActionResult Logout()
+    {
+      _context.HttpContext.Session.Clear();
+      TempData["success"] = "Has cerrado sesión correctamente";
+      return RedirectToAction("Index", "Home");
+    }
 
     //GET
     public IActionResult Management()
@@ -90,18 +107,19 @@ namespace SullivanBurger.Controllers
         return RedirectToAction("Management");
       }
 
-      TempData["error"] = "true";
+      TempData["error"] = "Se ha producido un error al crear el usuario";
+
       return View();
     }
 
     //GET
-    public IActionResult Edit(string? email)
+    public IActionResult Edit(string? id)
     {
-      if (email == null)
+      if (id == null)
       {
         return NotFound();
       }
-      var userFromDb = _db.Usuarios.Find(email);
+      var userFromDb = _db.Usuarios.Find(id);
       
       if (userFromDb == null)
       {
@@ -124,31 +142,132 @@ namespace SullivanBurger.Controllers
         return RedirectToAction("Management");
       }
 
-      TempData["error"] = "true";
+      TempData["error"] = "Se ha producido un error al editar el usuario";
       return View();
     }
 
     //GET
-    public IActionResult Delete(string? email)
+    public IActionResult EditProfile(string? id)
     {
-      if (email == null)
+      if (id == null)
       {
         return NotFound();
       }
-      var userFromDb = _db.Usuarios.Find(email);
+      var userFromDb = _db.Usuarios.Find(id);
 
       if (userFromDb == null)
       {
+
         return NotFound();
-      } else
-      {
-        TempData["success"] = "Se ha eliminado el usuario con email " + userFromDb.Email;
-        _db.Usuarios.Remove(userFromDb);
-        _db.SaveChanges();
       }
+
+      return View(userFromDb);
+    }
+
+    //POST
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> EditProfile(string id, Usuario obj)
+    {
+      ModelState.Remove("Email");
+      ModelState.Remove("Password");
+      ModelState.Remove("Rol");
+      ModelState.Remove("Puntos");
+
+      var userFromDb = _db.Usuarios.Find(id);
+      userFromDb.Nombre = obj.Nombre;
+      userFromDb.Apellidos = obj.Apellidos;
+      userFromDb.Telefono = obj.Telefono;
+      userFromDb.Direccion = obj.Direccion;
+
+      if (ModelState.IsValid)
+      {
+        try
+        {
+          _db.Update(userFromDb);
+          await _db.SaveChangesAsync();
+          TempData["success"] = "Los cambios de tu perfil se han guardado";
+
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+          if (!UsuarioExists(id))
+          {
+            return NotFound();
+          }
+          else
+          {
+            throw;
+          }
+        }
+        return RedirectToAction("Index", "Home");
+      }
+      return View(obj);
+    }
+
+
+    // GET: Providers/Delete/5
+    public async Task<IActionResult> Delete(string id)
+    {
+      if (id == null || _db.Usuarios == null)
+      {
+        return NotFound();
+      }
+
+      var usuario = await _db.Usuarios.FirstOrDefaultAsync(m => m.Email == id);
+      if (usuario == null)
+      {
+        return NotFound();
+      }
+
+      return View(usuario);
+    }
+
+    // POST: Providers/Delete/5
+    [HttpPost, ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(string id)
+    {
+      if (_db.Usuarios == null)
+      {
+        return Problem("Entity set 'ApplicationDbContext.Usuarios'  is null.");
+      }
+      var usuario = await _db.Usuarios.FindAsync(id);
+      if (usuario != null)
+      {
+        _db.Usuarios.Remove(usuario);
+      }
+
+      await _db.SaveChangesAsync();
+      TempData["success"] = "Se ha eliminado el usuario correctamente";
 
       return RedirectToAction("Management");
     }
 
+    //GET
+    //public IActionResult Delete(string? email)
+    //{
+    //  if (email == null)
+    //  {
+    //    return NotFound();
+    //  }
+    //  var userFromDb = _db.Usuarios.Find(email);
+
+    //  if (userFromDb == null)
+    //  {
+    //    return NotFound();
+    //  } else
+    //  {
+    //    TempData["success"] = "Se ha eliminado el usuario con email " + userFromDb.Email;
+    //    _db.Usuarios.Remove(userFromDb);
+    //    _db.SaveChanges();
+    //  }
+
+    //  return RedirectToAction("Management");
+    //}
+    private bool UsuarioExists(string id)
+    {
+      return (_db.Usuarios?.Any(e => e.Email == id)).GetValueOrDefault();
+    }
   }
 }

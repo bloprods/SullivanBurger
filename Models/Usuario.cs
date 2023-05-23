@@ -33,5 +33,10 @@ namespace SullivanBurger.Models
     [DisplayName("Puntos")]
     public int Puntos { get; set; } = 0;
 
+
+    public bool esAdmin()
+    {
+      return Rol == "admin" ? true : false;
+    }
   }
 }

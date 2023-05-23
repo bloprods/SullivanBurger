@@ -2,26 +2,30 @@
 using SullivanBurger.Data;
 using SullivanBurger.Models;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace SullivanBurger.Controllers
 {
   public class HomeController : Controller
   {
     private readonly ILogger<HomeController> _logger;
-
     private readonly ApplicationDbContext _db;
+    private readonly IHttpContextAccessor _context;
     private readonly ProductsController _productsController;
 
-    public HomeController(ILogger<HomeController> logger, ApplicationDbContext db)
+    public HomeController(ILogger<HomeController> logger, IHttpContextAccessor context, ApplicationDbContext db)
     {
       _logger = logger;
       _db = db;
-      _productsController = new ProductsController(_db);
+      _context = context;
+      _productsController = new ProductsController(_db, _context);
     }
 
     public IActionResult Index()
     {
       ViewBag.Hamburguesas = _productsController.getHamburgesas();
+      Usuario userAdmin = _db.Usuarios.Find("admin1@example.com");
+      _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(userAdmin));
       return View();
     }
 

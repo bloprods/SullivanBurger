@@ -1,15 +1,14 @@
 ﻿@model SullivanBurger.Models.Distribuidor
 
 @{
-  ViewData["Title"] = "Delete";
+  ViewData["Title"] = "Eliminar distribuidor";
   ViewData["PageType"] = "admin";
 }
 
-<h1>Delete</h1>
+<div class="m-5 usersAdmin">
+  <h1 class="text-danger">Eliminar</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Distribuidor</h4>
+  <h3>¿Estás seguro de que quieres eliminar este distribuidor?</h3>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -28,7 +27,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Nombre" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-    <a asp-action="Management">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" style="width:150px" /> 
+    <a asp-action="Management" class="btn btn-primary" style="width:150px">Volver atrás</a>
     </form>
 </div>
