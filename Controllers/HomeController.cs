@@ -24,8 +24,7 @@ namespace SullivanBurger.Controllers
     public IActionResult Index()
     {
       ViewBag.Hamburguesas = _productsController.getHamburgesas();
-      Usuario userAdmin = _db.Usuarios.Find("admin1@example.com");
-      _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(userAdmin));
+      
       return View();
     }
 
@@ -46,6 +45,8 @@ namespace SullivanBurger.Controllers
       
     public IActionResult Contact()
     {
+      Usuario userAdmin = _db.Usuarios.Find("admin1@example.com");
+      _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(userAdmin));
       return View();
     }
 
@@ -67,7 +68,7 @@ namespace SullivanBurger.Controllers
       return View();
     }
 
-  [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {
           return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

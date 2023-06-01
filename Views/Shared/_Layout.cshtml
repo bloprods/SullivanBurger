@@ -1,13 +1,31 @@
 ﻿@using System.Text.Json;
 @inject IHttpContextAccessor context;
 @{
-  string? jsonString = context.HttpContext.Session.GetString("Usuario");
+  string? jsonStringUsuario = context.HttpContext.Session.GetString("Usuario");
+  string? jsonStringCarrito = context.HttpContext.Session.GetString("Carrito");
+
+
   bool logeado = false;
+  bool hayCarrito = false;
   Usuario? userLogeado = new Usuario();
-  if (jsonString != null)
+  IEnumerable<Producto>? carrito;
+
+  if (jsonStringUsuario != null)
   {
-    userLogeado = JsonSerializer.Deserialize<Usuario>(jsonString);
+    userLogeado = JsonSerializer.Deserialize<Usuario>(jsonStringUsuario);
     logeado = true;
+  } else
+  {
+    logeado = false;
+  }
+
+  if (jsonStringCarrito != null)
+  {
+    carrito = JsonSerializer.Deserialize<IEnumerable<Producto>>(jsonStringCarrito);
+    hayCarrito = true;
+  } else
+  {
+    hayCarrito = false;
   }
 }
 <!DOCTYPE html>
@@ -56,6 +74,48 @@
                                         <li><a class="@(ViewData["Title"] == "Sobre nosotros" ? "active" : null)" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                                         <li><a class="@(ViewData["Title"] == "Productos" ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Products">Productos</a></li>
                                         <li><a class="@(ViewData["Title"] == "Contáctanos" ? "active" : null)" asp-area="" asp-controller="Home" asp-action="Contact">Contacto</a></li>
+                                        
+                                        <li class="responsiveNavItem d-none">
+                                            <a asp-area="" asp-controller="Orders" asp-action="Order">
+                                                Realizar pedido
+                                            </a>
+                                          </li>
+                                        @if(hayCarrito) {
+
+                                          <li class="responsiveNavItem d-none">
+                                            <a asp-area="" asp-controller="Orders" asp-action="Carrito">
+                                                Tu carrito
+                                            </a>
+                                          </li>
+                                        }
+                                        @if (logeado){
+                                        <li class="responsiveNavItem d-none">
+                                            <a asp-controller="Users" asp-action="EditProfile" asp-route-id="@userLogeado.Email">
+                                              Tu perfil
+                                            </a>
+                                        </li>
+                                        
+                                        if(userLogeado.esAdmin()){
+                                          <li class="responsiveNavItem d-none">
+                                            <a asp-area="" asp-controller="Home" asp-action="Admin">
+                                                Panel de admin
+                                            </a>
+                                          </li>
+                                        }
+                                        <li class="responsiveNavItem d-none">
+                                            <a asp-area="" asp-controller="Users" asp-action="Logout">
+                                                Cerrar sesión
+                                            </a>
+                                          </li>
+                                      }
+                                       
+                                        @if (!logeado){
+                                        <li class="responsiveNavItem d-none">
+                                            <a asp-area="" asp-controller="Users" asp-action="Login">
+                                                Iniciar sesión
+                                            </a>
+                                        </li>
+                                        }
                                     </ul>
                                 </nav>
                             </div>
@@ -77,8 +137,16 @@
                                               @userLogeado.Nombre
                                             </a>
                                         </li>
+                                      
+                                      @if(hayCarrito){
+                                        <li>
+                                          <a asp-area="" asp-controller="Orders" asp-action="Carrito">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                          </a>
+                                        </li>
+                                      }
                                         
-                                        if(userLogeado.esAdmin()){
+                                      @if(userLogeado.esAdmin()){
                                           <li>
                                             <a asp-area="" asp-controller="Home" asp-action="Admin">
                                                 <i class="fa fa-gear"></i>
@@ -90,6 +158,13 @@
                                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                                             </a>
                                           </li>
+                                      }
+                                      @if(!logeado && hayCarrito){
+                                        <li>
+                                          <a asp-area="" asp-controller="Orders" asp-action="Carrito">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                          </a>
+                                        </li>
                                       }
                                         <li>
                                             <a href="https://www.instagram.com/sullivanburger/">
@@ -107,7 +182,7 @@
                                     </ul>
                                 </div>
                                 <div class="book_btn d-none d-xl-block">
-                                    <a class="#" href="#">+34 689 325 436</a>
+                                    <a class="#" asp-controller="Orders" asp-action="Order">Realizar pedido</a>
                                 </div>
                             </div>
                         </div>

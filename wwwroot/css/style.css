@@ -990,6 +990,12 @@ h3 {
   background: #000;
 }
 
+@media (max-width: 991px) {
+  .responsiveNavItem {
+    display: block !important;
+  }
+}
+
 @media (max-width: 767px) {
 
   .header-area .main-header-area.sticky {

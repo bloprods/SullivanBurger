@@ -1,3 +1,26 @@
 div.header-area {
   background-color: black;
 }
+.precio {
+  color: coral;
+  font-weight: bold;
+}
+
+.nav-link.active {
+  background-color: black !important;
+  font-weight: bold !important;
+  color: #ffdf3f !important;
+}
+
+.sullivanButton {
+  background-color: black !important;
+  font-weight: bold !important;
+  color: #ffdf3f !important;
+}
+
+.orderInput {
+  border: 1px solid #d8d8d8;
+  font-weight: 500;
+  color: #8b8b8b;
+  width: 40%;
+}

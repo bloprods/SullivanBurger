@@ -31,13 +31,13 @@ Hamburguesas
 */
 
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
-VALUES ('Awebo', 'Pulled pork con bacon, queso, aros de cebolla, lechuga y guacamole.', 7.99, 'awebo.jpg', 60, 'hamburguesa', 'SullivanBurger');
+VALUES ('Awebo', 'Pulled pork con bacon, queso, aros de cebolla, lechuga y guacamole.', 7.99, 'awebo.png', 60, 'hamburguesa', 'SullivanBurger');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
 VALUES ('Sullivan', 'La estrella de la casa, ternera madurada, ingredientes secretos.', 7.00, 'sullivan.png', 30, 'hamburguesa', 'SullivanBurger');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
 VALUES ('Esencial', 'La simpleza con ternera, bacon, queso y ketchup.', 4.99, 'esencial.png', 100, 'hamburguesa', 'SullivanBurger');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
-VALUES ('Pecado Carnal', 'Utilizando ternera y pulled pork, hamburguesa para carnívoros.', 7.50, 'pecado_carnal.jpg', 60, 'hamburguesa', 'SullivanBurger');
+VALUES ('Pecado Carnal', 'Utilizando ternera y pulled pork, hamburguesa para carnívoros.', 7.50, 'pecado_carnal.png', 60, 'hamburguesa', 'SullivanBurger');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
 VALUES ('Texas', 'Ternera con lechuga, bacon, queso, cebolla crujiente y salsa barbacoa.', 5.99, 'texas.png', 20, 'hamburguesa', 'SullivanBurger');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
@@ -45,7 +45,7 @@ VALUES ('Ibérica', 'Black Angus con jamón ibérico, queso viejo y salmorejo en pa
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
 VALUES ('Vegana', 'Hamburguesa 100% vegetal con guacamole, cebolla, tomate y lechuga en pan de cereales.', 9.00, 'vegana.png', 20, 'hamburguesa', 'SullivanBurger');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
-VALUES ('Crispy chicken', 'Hamburguesa crujiente de pollo en pan artesano con bacon, lechuga y salsa alioli.', 5.50, 'crispy_chicken.jpg', 50, 'hamburguesa', 'SullivanBurger');
+VALUES ('Crispy chicken', 'Hamburguesa crujiente de pollo en pan artesano con bacon, lechuga y salsa alioli.', 5.50, 'crispy_chicken.png', 50, 'hamburguesa', 'SullivanBurger');
 
 /*
 Productos
@@ -58,7 +58,9 @@ VALUES ('Ensalada César', 'Sabrosa ensalada César con pollo a la parrilla', 4.99
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
 VALUES ('Ensalada Caprese', 'Fresca ensalada Caprese con tomate, mozzarella y albahaca', 5.99, 'ensalada_caprese.png', 15, 'complemento', 'Frutas Javier Cuevas');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
-VALUES ('Nachos con Queso', 'Crunchy nachos con salsa de queso derretido', 4.99, 'nachos_queso.jpg', 35, 'complemento', 'SullivanBurger');
+VALUES ('Nachos con Queso', 'Crunchy nachos con salsa de queso derretido', 4.99, 'nachos_queso.png', 35, 'complemento', 'SullivanBurger');
+INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
+VALUES ('Alitas de pollo', '6 unidades de alitas de pollo ahumadas', 1.75, 'alitas_pollo.png', 50, 'complemento', 'SullivanBurger');
 
 /*
 Productos

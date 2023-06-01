@@ -23,8 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\products\complements\" />
-    <Folder Include="wwwroot\img\products\drinks\" />
+    <Folder Include="wwwroot\img\products\complementos\" />
+    <Folder Include="wwwroot\img\products\bebidas\" />
+    <Folder Include="wwwroot\img\products\burgerHD\" />
   </ItemGroup>
 
 </Project>
