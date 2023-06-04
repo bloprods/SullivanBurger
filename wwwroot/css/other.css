@@ -5,6 +5,9 @@ div.header-area {
   color: coral;
   font-weight: bold;
 }
+i.precio {
+  font-size: 2rem;
+}
 
 .nav-link.active {
   background-color: black !important;
@@ -23,4 +26,20 @@ div.header-area {
   font-weight: 500;
   color: #8b8b8b;
   width: 40%;
+}
+
+.bigFont {
+  font-size: 1.7rem;
+}
+
+.bigFontLess {
+  font-size: 1.5rem;
+}
+
+.bigMargin {
+  margin-bottom: 20vw !important;
+}
+
+.tableVerticalAlign td {
+  vertical-align: middle;
 }

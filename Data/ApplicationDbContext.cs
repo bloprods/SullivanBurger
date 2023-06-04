@@ -17,5 +17,8 @@ namespace SullivanBurger.Data
     public DbSet<Usuario> Usuarios { get; set; }
     public DbSet<Distribuidor> Distribuidores { get; set; }
     public DbSet<Producto> Productos { get; set; }
+    public DbSet<Extra> Extras { get; set; }
+    public DbSet<Pedido> Pedidos { get; set; }
+    public DbSet<ProductoPedido> ProductosPedidos { get; set; }
   }
 }

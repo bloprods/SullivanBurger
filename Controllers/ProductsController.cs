@@ -36,22 +36,22 @@ namespace SullivanBurger.Controllers
 
       public IEnumerable<Producto> getHamburgesas()
       {
-        return _db.Productos.Where(p => p.Tipo == "hamburguesa");
+        return _db.Productos.Where(p => p.Tipo == "hamburguesa" && p.Stock > 0);
       }
 
       public IEnumerable<Producto> getComplementos()
       {
-        return _db.Productos.Where(p => p.Tipo == "complemento");
+        return _db.Productos.Where(p => p.Tipo == "complemento" && p.Stock > 0);
       }
 
       public IEnumerable<Producto> getBebidas()
       {
-        return _db.Productos.Where(p => p.Tipo == "bebida");
+        return _db.Productos.Where(p => p.Tipo == "bebida" && p.Stock > 0);
       }
 
       public IEnumerable<Producto> getPostres()
       {
-        return _db.Productos.Where(p => p.Tipo == "postre");
+        return _db.Productos.Where(p => p.Tipo == "postre" && p.Stock > 0);
       }
 
       // GET: Products/Create
