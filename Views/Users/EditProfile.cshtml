@@ -6,37 +6,90 @@
 }
 
 <form method="post" asp-action="EditProfile" class="usersAdmin m-5">
-  <div class="row pb-2">
-    <h2 class="text-primary">Editar perfil</h2>
-    <hr />
+
+  <div class="row">
+    <div class="col pb-2">
+
+      <h2 class="text-primary">Editar perfil</h2>
+      <hr />
+      <div class="mb-3">
+        <label asp-for="Email"></label>
+        <input disabled type="email" asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+      </div>
+      <div class="mb-3">
+        <label asp-for="Nombre"></label>
+        <input type="text" asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+      </div>
+      <div class="mb-3">
+        <label asp-for="Apellidos"></label>
+        <input type="text" asp-for="Apellidos" class="form-control" />
+        <span asp-validation-for="Apellidos" class="text-danger"></span>
+      </div>
+      <div class="mb-3">
+        <label asp-for="Telefono"></label>
+        <input type="number" asp-for="Telefono" class="form-control" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+      </div>
+      <div class="mb-3">
+        <label asp-for="Direccion"></label>
+        <input type="text" asp-for="Direccion" class="form-control" />
+        <span asp-validation-for="Direccion" class="text-danger"></span>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:150px"> Guardar </button>
+      <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" style="width:150px">
+        Cancelar
+      </a>
+    </div>
+    @if(ViewBag.Pedidos != null)
+    {
+      <div class="col pb-2">
+        <h2 class="text-primary">Tus pedidos</h2>
+        <hr class="mb-5" />
+        <div class="accordion" id="accordionPedidos">
+          @foreach (Pedido pedido in ViewBag.Pedidos)
+          {
+            <div class="card">
+              <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                  <button class="btn btn-link btn-block text-left text-decoration-none text-dark bigFontLess" type="button" data-toggle="collapse" data-target="#@pedido.Id-Collapse" aria-expanded="true" aria-controls="collapse">
+                    Pedido @pedido.Fecha @pedido.Estado
+                  </button>
+                </h2>
+              </div>
+
+              <div id="@pedido.Id-Collapse" class="collapse" aria-labelledby="headingOne" data-parent="#accordionPedidos">
+                <table class="card-body table table-striped table-hover">
+                  <tbody>
+                    @{float total = 0;}
+
+                    @foreach (ProductoPedido linea in pedido.Productos)
+                    {
+                      total += linea.Cantidad * linea.Producto.Precio;
+                      <tr>
+                        <td>@linea.Producto.Nombre</td>
+                        <td>@linea.Cantidad unidades</td>
+                        <td>@string.Format("{0:0.00}", linea.Producto.Precio * @linea.Cantidad)€</td>
+                        <td><img src="/img/products/@string.Join("", linea.Producto.Tipo,"s")/@linea.Producto.Imagen" width="128"></td>
+                      </tr>
+                    }
+                    <tr>
+                      <td class="bigFontLess">TOTAL</td>
+                      <td></td>
+                      <td class="bigFontLess">@string.Format("{0:0.00}",@total)€</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          }
+        </div>
+      </div>
+
+    }
+
   </div>
-  <div class="mb-3">
-    <label asp-for="Email"></label>
-    <input disabled type="email" asp-for="Email" class="form-control" />
-    <span asp-validation-for="Email" class="text-danger"></span>
-  </div>
-  <div class="mb-3">
-    <label asp-for="Nombre"></label>
-    <input type="text" asp-for="Nombre" class="form-control" />
-    <span asp-validation-for="Nombre" class="text-danger"></span>
-  </div>
-  <div class="mb-3">
-    <label asp-for="Apellidos"></label>
-    <input type="text" asp-for="Apellidos" class="form-control" />
-    <span asp-validation-for="Apellidos" class="text-danger"></span>
-  </div>
-  <div class="mb-3">
-    <label asp-for="Telefono"></label>
-    <input type="number" asp-for="Telefono" class="form-control" />
-    <span asp-validation-for="Telefono" class="text-danger"></span>
-  </div>
-  <div class="mb-3">
-    <label asp-for="Direccion"></label>
-    <input type="text" asp-for="Direccion" class="form-control" />
-    <span asp-validation-for="Direccion" class="text-danger"></span>
-  </div>
-  <button type="submit" class="btn btn-primary" style="width:150px"> Guardar </button>
-  <a asp-controller="Home" asp-action="Index" class="btn btn-secondary" style="width:150px">
-    Cancelar
-  </a>
 </form>

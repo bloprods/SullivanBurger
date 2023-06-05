@@ -14,7 +14,7 @@ namespace SullivanBurger.Models
     public DateTime Fecha { get; set; }
     public string Estado { get; set; }
     public string Tipo { get; set; }
-    public List<ProductoPedido> Productos { get; set; }
+    public IEnumerable<ProductoPedido> Productos { get; set; }
     [ForeignKey("Usuario")]
     public string? Email { get; set; }
     public Usuario Usuario { get; set; }

@@ -43,3 +43,7 @@ i.precio {
 .tableVerticalAlign td {
   vertical-align: middle;
 }
+
+.text-decoration-none {
+  text-decoration: none;
+}

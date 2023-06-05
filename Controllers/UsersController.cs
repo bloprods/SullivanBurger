@@ -160,7 +160,9 @@ namespace SullivanBurger.Controllers
 
         return NotFound();
       }
-
+      IEnumerable<Pedido> pedidos = _db.Pedidos.Where(p => p.Usuario == userFromDb).Include("Productos.Producto");
+      
+      ViewBag.Pedidos = pedidos.Count() > 0 ? pedidos : null;
       return View(userFromDb);
     }
 
