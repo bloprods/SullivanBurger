@@ -164,6 +164,8 @@ namespace SullivanBurger.Controllers
       string? jsonStringUsuario = _context.HttpContext.Session.GetString("Usuario");
       Usuario usuarioLogeado = jsonStringUsuario == null ? null : JsonSerializer.Deserialize<Usuario>(jsonStringUsuario);
       Pedido pedidoNuevo;
+      float precioTotal = 0;
+      int puntosGanados = 0;
 
       if (usuarioLogeado == null)
       {
@@ -185,13 +187,25 @@ namespace SullivanBurger.Controllers
         productoDb.Stock -= item.Cantidad;
         _db.Productos.Update(productoDb);
         _db.ProductosPedidos.Add(lineaPedido);
+        precioTotal += item.Cantidad * item.Producto.Precio;
+      }
+
+      if(usuarioLogeado != null)
+      {
+        puntosGanados = (int)(precioTotal / 100 * 90 * 0.4);
+        usuarioLogeado.Puntos += puntosGanados;
+        _db.Usuarios.Update(usuarioLogeado);
       }
 
       _db.SaveChanges();
 
+      _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(usuarioLogeado));
+
       _context.HttpContext.Session.Remove("Carrito");
 
-      TempData["success"] = "Se ha realizado el pedido correctamente";
+      string toast = "Se ha realizado el pedido correctamente";
+
+      TempData["success"] = usuarioLogeado != null ? toast + $". ¡Con la compra, has ganado {puntosGanados} puntos!" : toast;
 
       return RedirectToAction("Order");
 

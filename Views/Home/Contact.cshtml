@@ -1,5 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Contáctanos";
+﻿@inject IHttpContextAccessor context;
+@model Email;
+
+@using System.Text.Json;
+
+@{
+  ViewData["Title"] = "Contáctanos";
+  string? jsonStringUsuario = context.HttpContext.Session.GetString("Usuario");
+  Usuario? userLogeado = new Usuario();
+  bool logeado = false;
+
+  if (jsonStringUsuario != null)
+  {
+    userLogeado = JsonSerializer.Deserialize<Usuario>(jsonStringUsuario);
+    logeado = true;
+  }
+  else
+  {
+    logeado = false;
+  }
 }
 
 <!-- bradcam_area_start -->
@@ -20,26 +38,44 @@
                 <h2 class="contact-title">Habla con nosotros</h2>
             </div>
             <div class="col-lg-8">
-                <form class="form-contact contact_form" id="contactForm" novalidate="novalidate">
+                <form class="form-contact contact_form" id="contactForm" novalidate="novalidate" method="post">
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce el mensaje'" placeholder=" Introduce el mensaje"></textarea>
+                              <textarea class="form-control w-100" name="message" id="message" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce el mensaje'" placeholder=" Introduce el mensaje" asp-for="Message"></textarea>
+                            </div>
+                        </div>
+                        @if(logeado){
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                                <input disabled class="form-control valid" name="name" id="name" type="text" value="@userLogeado.Nombre @userLogeado.Apellidos" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu nombre'" placeholder="Introduce tu nombre" asp-for="Name">
+                                <input class="form-control valid" name="name" id="name" type="hidden" value="@userLogeado.Nombre @userLogeado.Apellidos" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu nombre'" placeholder="Introduce tu nombre" asp-for="Name">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu nombre'" placeholder="Introduce tu nombre">
+                                <input disabled class="form-control valid" name="from" id="from" type="email" value="@userLogeado.Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu email'" placeholder="Introduce tu email" asp-for="From">
+                                <input class="form-control valid" name="from" id="from" type="hidden" value="@userLogeado.Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu email'" placeholder="Introduce tu email" asp-for="From">
+
+                            </div>
+                        </div>
+                        } else {
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                                <input class="form-control valid" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu nombre'" placeholder="Introduce tu nombre" asp-for="Name">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control valid" name="email" id="email" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu email'" placeholder="Introduce tu email">
+                              <input class="form-control valid" name="from" id="from" type="email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce tu email'" placeholder="Introduce tu email" asp-for="From">
                             </div>
                         </div>
+                        }
+                        
+
                         <div class="col-12">
                             <div class="form-group">
-                                <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce el asunto'" placeholder="Introduce el asunto">
+                                <input class="form-control" name="subject" id="subject" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Introduce el asunto'" placeholder="Introduce el asunto" asp-for="Subject">
                             </div>
                         </div>
                     </div>

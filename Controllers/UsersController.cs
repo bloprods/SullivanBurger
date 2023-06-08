@@ -38,7 +38,7 @@ namespace SullivanBurger.Controllers
         {
           ViewBag.LoginError = "La cuenta introducida no existe. Por favor, vuelva a intentarlo.";
         }
-        else if (userFromDb.Password != loginData.Password)
+        else if (Usuario.DecodeFrom64(userFromDb.Password) != loginData.Password)
         {
           ViewBag.LoginError = "Las credenciales no son correctas. Por favor, vuelva a intentarlo.";
         } else
@@ -65,11 +65,21 @@ namespace SullivanBurger.Controllers
     {
       if (ModelState.IsValid)
       {
-        _db.Usuarios.Add(obj);
-        _db.SaveChanges();
-        TempData["success"] = "Se ha registrado correctamente";
+        try
+        {
 
-        return RedirectToAction("Login");
+          obj.Password = Usuario.EncodePasswordToBase64(obj.Password);
+          _db.Usuarios.Add(obj);
+          _db.SaveChanges();
+          TempData["success"] = "Se ha registrado correctamente";
+
+          return RedirectToAction("Login");
+        }
+        catch (DbUpdateException) {
+          TempData["error"] = "La cuenta introducida ya existe";
+
+        }
+
       }
       return View();
     }

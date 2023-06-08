@@ -133,6 +133,13 @@
                                     <ul>
                                       @if (logeado){
                                         <li>
+                                            <a asp-controller="Home" asp-action="Index">
+                                              @userLogeado.Puntos
+                                              <i class="fa fa-diamond" aria-hidden="true"></i>
+
+                                            </a>
+                                        </li>
+                                        <li>
                                             <a asp-controller="Users" asp-action="EditProfile" asp-route-id="@userLogeado.Email">
                                               @userLogeado.Nombre
                                             </a>
