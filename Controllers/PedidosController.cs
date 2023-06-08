@@ -20,7 +20,7 @@ namespace SullivanBurger.Controllers
         }
 
         // GET: Pedidos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Management()
         {
             var applicationDbContext = _context.Pedidos.Include(p => p.Usuario);
             return View(await applicationDbContext.ToListAsync());

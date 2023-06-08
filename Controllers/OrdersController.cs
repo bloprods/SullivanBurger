@@ -14,11 +14,11 @@ namespace SullivanBurger.Controllers
     private readonly IHttpContextAccessor _context;
     private readonly ProductsController _productsController;
 
-    public OrdersController(IHttpContextAccessor context, ApplicationDbContext db)
+    public OrdersController(IHttpContextAccessor context, ApplicationDbContext db, IWebHostEnvironment env)
     {
       _db = db;
       _context = context;
-      _productsController = new ProductsController(_db, _context);
+      _productsController = new ProductsController(_db, _context, env);
     }
 
     //GET

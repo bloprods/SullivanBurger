@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Win32.SafeHandles;
 using SullivanBurger.Data;
 using SullivanBurger.Models;
 
@@ -14,12 +16,14 @@ namespace SullivanBurger.Controllers
     {
       private readonly ApplicationDbContext _db;
       private readonly IHttpContextAccessor _context;
+      private readonly IWebHostEnvironment _web;
 
 
-    public ProductsController(ApplicationDbContext db, IHttpContextAccessor context)
+    public ProductsController(ApplicationDbContext db, IHttpContextAccessor context, IWebHostEnvironment env)
     {
       _db = db;
       _context = context;
+      _web = env;
     }
 
     // GET: Products
@@ -66,11 +70,26 @@ namespace SullivanBurger.Controllers
       // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
       [HttpPost]
       [ValidateAntiForgeryToken]
-      public async Task<IActionResult> Create([Bind("Nombre,Descripcion,Precio,Imagen,Tipo,Stock,DistribuidorId")] Producto producto)
+      public async Task<IActionResult> Create([Bind("Nombre,Descripcion,Precio,Tipo,Stock,DistribuidorId")] Producto producto, IFormFile postedFile)
       {
       ModelState.Remove("Distribuidor");
+      ModelState.Remove("Imagen");
+
       if (ModelState.IsValid)
         {
+          producto.Imagen = Path.GetFileName(postedFile.FileName);
+          string rutaProducto = $"img\\products\\{producto.Tipo}s";
+          string path = Path.Combine(_web.WebRootPath, rutaProducto);
+
+          if (postedFile != null)
+          {
+            var target = Path.Combine(path, postedFile.FileName);
+            FileStream stream = new FileStream(target, FileMode.Create);
+            
+            postedFile.CopyTo(stream);
+            
+          }
+
           _db.Add(producto);
           await _db.SaveChangesAsync();
           TempData["success"] = "Se ha creado el producto correctamente";
@@ -164,20 +183,27 @@ namespace SullivanBurger.Controllers
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> DeleteConfirmed(string id)
       {
-          if (_db.Productos == null)
-          {
-              return Problem("Entity set 'ApplicationDbContext.Productos'  is null.");
-          }
-          var producto = await _db.Productos.FindAsync(id);
-          if (producto != null)
-          {
-              _db.Productos.Remove(producto);
-          }
-          
-          await _db.SaveChangesAsync();
-          TempData["success"] = "Se ha eliminado el producto correctamente";
+        if (_db.Productos == null)
+        {
+            return Problem("Entity set 'ApplicationDbContext.Productos'  is null.");
+        }
+        var producto = await _db.Productos.FindAsync(id);
 
-          return RedirectToAction("Management");
+        if (producto != null)
+        {
+          string rutaProducto = $"img\\products\\{producto.Tipo}s";
+          string path = Path.Combine(_web.WebRootPath, rutaProducto);
+          string target = Path.Combine(path, producto.Imagen);
+
+          System.IO.File.Delete(target);
+
+          _db.Productos.Remove(producto);
+        }
+          
+        await _db.SaveChangesAsync();
+        TempData["success"] = "Se ha eliminado el producto correctamente";
+
+        return RedirectToAction("Management");
       }
 
         

@@ -47,3 +47,19 @@ i.precio {
 .text-decoration-none {
   text-decoration: none;
 }
+
+.flex-gap {
+  display: inline-flex !important;
+  flex-wrap: wrap !important;
+  gap: 30px !important;
+}
+
+@media (max-width: 420px) {
+  .bigFont {
+    font-size: 1.3rem;
+  }
+
+  .bigFontLess {
+    font-size: 1rem;
+  }
+}

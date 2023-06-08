@@ -7,7 +7,7 @@
 
 <section class="usersAdmin m-5">
   <h1>Panel de <b>Administrador</b></h1>
-  <div class="d-flex flex-row justify-content-left text-center">
+  <div class="d-flex flex-row text-center flex-gap">
     <article class="card" style="width: 18rem;">
       <img class="card-img-top" src="/img/adminPanel/users.png" alt="Card image cap">
       <div class="card-body">
@@ -16,7 +16,7 @@
         <a asp-controller="Users" asp-action="Management" class="btn btn-primary">Acceder</a>
       </div>
     </article>
-    <article class="card ml-5 mr-5" style="width: 18rem;">
+    <article class="card" style="width: 18rem;">
       <img class="card-img-top" src="/img/adminPanel/products.png" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Productos</h5>
@@ -25,7 +25,7 @@
       </div>
     </article>
 
-    <article class="card mr-5" style="width: 18rem;">
+    <article class="card" style="width: 18rem;">
       <img class="card-img-top" src="/img/adminPanel/providers.jpg" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Distribuidores</h5>
@@ -35,11 +35,11 @@
     </article>
 
     <article class="card" style="width: 18rem;">
-      <img class="card-img-top" src="/img/adminPanel/providers.jpg" alt="Card image cap">
+      <img class="card-img-top" src="/img/adminPanel/orders.png" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">Pedidos</h5>
         <p class="card-text">Gestiona los pedidos de la página web.</p>
-        <a asp-controller="Pedidos" asp-action="Index" class="btn btn-primary">Acceder</a>
+        <a asp-controller="Pedidos" asp-action="Management" class="btn btn-primary">Acceder</a>
       </div>
     </article>
 
