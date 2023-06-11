@@ -46,7 +46,9 @@
           <td>@obj.Nombre</td>
           <td>@obj.Descripcion</td>
           <td>@obj.Precio</td>
-          <td>@obj.Imagen</td>
+          <td>
+            <img src="/img/products/@string.Join("", obj.Tipo,"s")/@obj.Imagen" width="128">
+          </td>
           <td>@obj.Tipo</td>
           <td>@obj.Stock</td>
           <td>@obj.DistribuidorId</td>

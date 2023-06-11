@@ -87,7 +87,7 @@ namespace SullivanBurger.Controllers
             FileStream stream = new FileStream(target, FileMode.Create);
             
             postedFile.CopyTo(stream);
-            
+            stream.Close();
           }
 
           _db.Add(producto);

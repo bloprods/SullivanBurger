@@ -39,6 +39,11 @@ namespace SullivanBurger.Models
       return Rol == "admin" ? true : false;
     }
 
+    public bool esRepartidor()
+    {
+      return Rol == "repartidor" ? true : false;
+    }
+
     public static string EncodePasswordToBase64(string password)
     {
       try

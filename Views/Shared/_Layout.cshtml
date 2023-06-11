@@ -27,6 +27,11 @@
   {
     hayCarrito = false;
   }
+
+  if (@ViewData["PageType"] == "admin" && !logeado || @ViewData["PageType"] == "admin" && logeado && !userLogeado.esAdmin())
+  {
+    context.HttpContext.Response.Redirect("/");
+  }
 }
 <!DOCTYPE html>
 <html lang="es">
@@ -102,6 +107,14 @@
                                             </a>
                                           </li>
                                         }
+
+                                        if(userLogeado.esRepartidor()){
+                                          <li class="responsiveNavItem d-none">
+                                            <a asp-area="" asp-controller="Home" asp-action="Repartidor">
+                                                Panel de repartidor
+                                            </a>
+                                          </li>
+                                        }
                                         <li class="responsiveNavItem d-none">
                                             <a asp-area="" asp-controller="Users" asp-action="Logout">
                                                 Cerrar sesión
@@ -157,6 +170,13 @@
                                           <li>
                                             <a asp-area="" asp-controller="Home" asp-action="Admin">
                                                 <i class="fa fa-gear"></i>
+                                            </a>
+                                          </li>
+                                        }
+                                        @if(userLogeado.esRepartidor()){
+                                          <li>
+                                            <a asp-area="" asp-controller="Home" asp-action="Repartidor">
+                                                <i class="fa fa-list-alt" aria-hidden="true"></i>
                                             </a>
                                           </li>
                                         }

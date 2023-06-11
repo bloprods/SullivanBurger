@@ -20,5 +20,6 @@ namespace SullivanBurger.Data
     public DbSet<Extra> Extras { get; set; }
     public DbSet<Pedido> Pedidos { get; set; }
     public DbSet<ProductoPedido> ProductosPedidos { get; set; }
+    public DbSet<ValoracionRestaurante> ValoracionesRestaurante { get; set; }
   }
 }

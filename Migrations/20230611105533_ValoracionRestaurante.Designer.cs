@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SullivanBurger.Data;
 
@@ -11,9 +12,11 @@ using SullivanBurger.Data;
 namespace SullivanBurger.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230611105533_ValoracionRestaurante")]
+    partial class ValoracionRestaurante
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,8 +205,8 @@ namespace SullivanBurger.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<double>("Valoracion")
-                        .HasColumnType("float");
+                    b.Property<float>("Valoracion")
+                        .HasColumnType("real");
 
                     b.HasKey("Email");
 

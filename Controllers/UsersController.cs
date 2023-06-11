@@ -256,27 +256,6 @@ namespace SullivanBurger.Controllers
       return RedirectToAction("Management");
     }
 
-    //GET
-    //public IActionResult Delete(string? email)
-    //{
-    //  if (email == null)
-    //  {
-    //    return NotFound();
-    //  }
-    //  var userFromDb = _db.Usuarios.Find(email);
-
-    //  if (userFromDb == null)
-    //  {
-    //    return NotFound();
-    //  } else
-    //  {
-    //    TempData["success"] = "Se ha eliminado el usuario con email " + userFromDb.Email;
-    //    _db.Usuarios.Remove(userFromDb);
-    //    _db.SaveChanges();
-    //  }
-
-    //  return RedirectToAction("Management");
-    //}
     private bool UsuarioExists(string id)
     {
       return (_db.Usuarios?.Any(e => e.Email == id)).GetValueOrDefault();

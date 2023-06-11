@@ -47,7 +47,7 @@ Productos
 Complementos
 */
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
-VALUES ('Patatas Fritas', 'Crujientes patatas fritas doradas y saladas', 3.49, 'patatas_fritas.png', 100, 'complemento', 'Frutas Javier Cuevas');
+VALUES ('Patatas Fritas', 'Crujientes patatas fritas doradas y saladas', 1.49, 'patatas_fritas.png', 100, 'complemento', 'Frutas Javier Cuevas');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 
 VALUES ('Ensalada César', 'Sabrosa ensalada César con pollo a la parrilla', 4.99, 'ensalada_cesar.png', 15, 'complemento', 'Frutas Javier Cuevas');
 INSERT INTO Productos (Nombre, Descripcion, Precio, Imagen, Stock, Tipo, DistribuidorId) 

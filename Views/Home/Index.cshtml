@@ -1,5 +1,7 @@
-﻿@{
+﻿@model SullivanBurger.Models.ValoracionRestaurante
+@{
     ViewData["Title"] = "Sullivan Burger - Web Oficial";
+    IEnumerable<ValoracionRestaurante> valoraciones = ViewBag.Valoraciones;
 }
 
 <!-- slider_area_start -->
@@ -98,7 +100,7 @@
                         <p>
                             - Selección de un refresco de 40 cl y bebidas alcohólicas.
                         </p>
-                        <a href="#" class="boxed-btn3">Pedir ahora</a>
+                        @*<a href="#" class="boxed-btn3">Pedir ahora</a>*@
                     </div>
 
                 </div>
@@ -122,7 +124,7 @@
                             de 30cl o una cerveza sin alcohol Mahou de 30cl
 
                         </p>
-                        <a href="#" class="boxed-btn3">Pedir ahora</a>
+                        @*<a href="#" class="boxed-btn3">Pedir ahora</a>*@
                     </div>
                 </div>
             </div>
@@ -187,97 +189,89 @@
     </div>
 </div>
 <!-- video_area_end -->
-<!-- testimonial_area_start  -->
-<div class="testimonial_area ">
+@if (valoraciones.Count() > 0)
+{
+  <!-- testimonial_area_start  -->
+  <div class="testimonial_area ">
     <div class="container">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="section_title mb-60 text-center">
-                    <span>Lo que dicen de nosotros</span>
-                    <h3>Valoraciones de nuestros clientes</h3>
-                </div>
-            </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="section_title mb-60 text-center">
+            <span>Lo que dicen de nosotros</span>
+            <h3>Valoraciones de nuestros clientes</h3>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="testmonial_active owl-carousel">
-                    <div class="single_carousel">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="single_testmonial text-center">
-                                    <p>
-                                        "Rápida entrega y comida excepcional. Hamburguesas muy recomendadas con pan
-                                        artesano"
-                                    </p>
-                                    <div class="testmonial_author">
-                                        <div class="thumb">
-                                            <img src="/img/testmonial/1.png" alt="">
-                                        </div>
-                                        <h4>Kristiana Ronaldo</h4>
-                                        <div class="stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12">
+          <div class="testmonial_active owl-carousel">
+            @foreach (ValoracionRestaurante val in valoraciones)
+            {
+            <div class="single_carousel">
+              <div class="row justify-content-center">
+                <div class="col-lg-8">
+                  <div class="single_testmonial text-center">
+                    <p>
+                      @val.Comentario
+                    </p>
+                    <div class="testmonial_author">
+                      <div class="thumb">
+                        <img src="/img/testmonial/user.png" width="62" height="62" alt="">
+                      </div>
+                      <h4>@val.Usuario.Nombre @val.Usuario.Apellidos</h4>
+                      <div class="stars">
+                        @while(val.Valoracion > 0)
+                        {
+                          if (val.Valoracion >= 1)
+                          {
+                            <i class="fa fa-star"></i>
+                            val.Valoracion--;
+                          } else if (val.Valoracion >= 0.5)
+                          {
+                            <i class="fa fa-star-half"></i>
+                            val.Valoracion -= 0.5;
+                          } else
+                          {
+                            val.Valoracion--;
+                          }
+                        }
+                      </div>
                     </div>
-                    <div class="single_carousel">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="single_testmonial text-center">
-                                    <p>"Muy buena calidad y muy simpáticos. Llegó muy puntual"</p>
-                                    <div class="testmonial_author">
-                                        <div class="thumb">
-                                            <img src="/img/testmonial/2.png" alt="">
-                                        </div>
-                                        <h4>Juan Alberto</h4>
-                                        <div class="stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="single_carousel">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <div class="single_testmonial text-center">
-                                    <p>
-                                        "Todo estaba riquísimo y con una atención estupenda, ¡repetiremos seguro!"
-                                    </p>
-                                    <div class="testmonial_author">
-                                        <div class="thumb">
-                                            <img src="/img/testmonial/3.png" alt="">
-                                        </div>
-                                        <h4>Andrés Boquerón</h4>
-                                        <div class="stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-half"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  </div>
                 </div>
+              </div>
             </div>
+            }
+          </div>
+          @if (ViewBag.Logeado && !ViewBag.yaValorado)
+          {
+            <form asp-action="NuevaValoracion" method="post" class="d-flex flex-column align-items-center">
+              <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              <input type="hidden" asp-for="Email" value="@ViewBag.Usuario.Email" />
+              <div class="d-flex flex-row justify-content-center text-center flex-gap">
+                <div class="form-group">
+                  <label asp-for="Comentario" class="control-label"></label>
+                  <input required asp-for="Comentario" class="form-control" />
+                  <span asp-validation-for="Comentario" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                  <label asp-for="Valoracion" class="control-label"></label>
+                  <input required type="number" max="5" min="1" asp-for="Valoracion" class="form-control"></input>
+                  <span asp-validation-for="Valoracion" class="text-danger"></span>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-primary" style="width:150px"> Enviar </button>
+              </div>
+            </form>
+          }
         </div>
+      </div>
     </div>
-</div>
-<!-- testimonial_area_ned  -->
+  </div>
+  <!-- testimonial_area_ned  -->
+}
 <!-- instragram_area_start -->
 <div class="instragram_area">
     <div class="container">

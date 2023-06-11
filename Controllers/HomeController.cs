@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Net.Mail;
 using System.Net;
 using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Text;
 
 namespace SullivanBurger.Controllers
 {
@@ -25,13 +28,26 @@ namespace SullivanBurger.Controllers
 
     public IActionResult Index()
     {
+      string? jsonUsuario = _context.HttpContext.Session.GetString("Usuario");
       ViewBag.Hamburguesas = _productsController.getHamburgesas();
-      
+      ViewBag.Valoraciones = _db.ValoracionesRestaurante.Include("Usuario");
+      if (jsonUsuario != null)
+      {
+        Usuario? usuario = JsonSerializer.Deserialize<Usuario>(jsonUsuario);
+        ViewBag.Usuario = usuario;
+        ViewBag.Logeado = true;
+        ViewBag.yaValorado = _db.ValoracionesRestaurante.Find(usuario.Email) == null ? false : true;
+      } else
+      {
+        ViewBag.Logeado = false;
+      }
       return View();
     }
 
     public IActionResult About()
     {
+      //Usuario userAdmin = _db.Usuarios.Find("admin1@example.com");
+      //_context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(userAdmin));
       return View();
     }
 
@@ -47,8 +63,7 @@ namespace SullivanBurger.Controllers
       
     public IActionResult Contact()
     {
-      Usuario userAdmin = _db.Usuarios.Find("admin1@example.com");
-      _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(userAdmin));
+      
       return View();
     }
 
@@ -59,7 +74,6 @@ namespace SullivanBurger.Controllers
         TempData["error"] = "Hay campos vacíos o inválidos en el formulario.";
 
         return View();
-
       }
 
       string Body = emailData.Message + $" \n\nMensaje enviado por {emailData.Name} con email {emailData.From}.";
@@ -98,6 +112,34 @@ namespace SullivanBurger.Controllers
 
     public IActionResult Admin() { 
       return View();
+    }
+
+    public IActionResult Repartidor()
+    {
+      return View(_db.Pedidos.Include("Usuario").Where(x => x.Estado == "En camino"));
+    }
+
+    public IActionResult PedidoEntregado(int id)
+    {
+      _db.Pedidos.Find(id).Estado = "Entregado";
+      _db.SaveChanges();
+      TempData["success"] = "El pedido seleccionado se ha entregado";
+      return RedirectToAction("Repartidor");
+    }
+
+    [HttpPost]
+    public IActionResult NuevaValoracion(ValoracionRestaurante ValoracionObj)
+    {
+      if (!ModelState.IsValid)
+      {
+        TempData["error"] = "Es necesario que introduzcas los valores correctamente al enviar la valoración.";
+        return RedirectToAction("Index");
+      }
+
+      _db.ValoracionesRestaurante.Add(ValoracionObj);
+      _db.SaveChanges();
+
+      return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

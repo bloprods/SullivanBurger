@@ -50,17 +50,17 @@
         <div class="accordion" id="accordionPedidos">
           @foreach (Pedido pedido in ViewBag.Pedidos)
           {
-            <div class="card">
+            <div class="card table-responsive">
               <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
                   <button class="btn btn-link btn-block text-left text-decoration-none text-dark bigFontLess" type="button" data-toggle="collapse" data-target="#@pedido.Id-Collapse" aria-expanded="true" aria-controls="collapse">
-                    Pedido @pedido.Fecha @pedido.Estado
+                    Pedido Nº @pedido.Id | @pedido.Fecha | @pedido.Estado
                   </button>
                 </h2>
               </div>
 
               <div id="@pedido.Id-Collapse" class="collapse" aria-labelledby="headingOne" data-parent="#accordionPedidos">
-                <table class="card-body table table-striped table-hover">
+                <table class="card-body table table-striped table-hover ">
                   <tbody>
                     @{float total = 0;}
 

@@ -5,4 +5,12 @@ Lista de implementaciones -> https://www.evernote.com/shard/s636/sh/197191e2-774
 
 Carpeta con documentos relacionados con el proyecto -> "docs"
 
+Usuarios
+
+Email													Contraseña					Rol
+admin1@example.com						contrasena1					admin
+brunolopez25702blr@gmail.com	contrasena2					repartidor
+usuario1@example.com					contrasena3					cliente
+
+
 Creado por Bruno López Rodríguez.
