@@ -54,6 +54,7 @@ i.precio {
   gap: 30px !important;
 }
 
+
 @media (max-width: 420px) {
   .bigFont {
     font-size: 1.3rem;
@@ -63,3 +64,4 @@ i.precio {
     font-size: 1rem;
   }
 }
+

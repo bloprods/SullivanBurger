@@ -7,6 +7,8 @@
 
   bool logeado = false;
   bool hayCarrito = false;
+  int sizeCarrito = 0;
+
   Usuario? userLogeado = new Usuario();
   IEnumerable<Producto>? carrito;
 
@@ -23,6 +25,7 @@
   {
     carrito = JsonSerializer.Deserialize<IEnumerable<Producto>>(jsonStringCarrito);
     hayCarrito = true;
+    sizeCarrito = carrito.Count();
   } else
   {
     hayCarrito = false;
@@ -161,7 +164,7 @@
                                       @if(hayCarrito){
                                         <li>
                                           <a asp-area="" asp-controller="Orders" asp-action="Carrito">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i><sup class="text-warning pl-1"><b>@sizeCarrito</b></sup>
                                           </a>
                                         </li>
                                       }

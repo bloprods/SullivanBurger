@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Sullivan Burger - Web Oficial";
     IEnumerable<ValoracionRestaurante> valoraciones = ViewBag.Valoraciones;
+
 }
 
 <!-- slider_area_start -->
@@ -43,6 +44,8 @@
     </div>
 </div>
 <!-- slider_area_end -->
+
+
 <!-- best_burgers_area_start  -->
 <div class="best_burgers_area">
   <div class="container">
@@ -79,6 +82,51 @@
       </div>
     </div>
   </div>
+
+  @if (ViewBag.Logeado)
+  {
+  <!-- promociones -->
+  <div class="section_title text-center mb-80 mt-5">
+    <span>Promociones</span>
+  </div>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <img class="card-img-top" src="/img/promotions/ticket.png" alt="Ticket Buffet">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title">Ticket Buffet</h5>
+              <form method="post" asp-action="ComprarPromocion">
+                <input type="hidden" name="puntos" value="80" />
+                <button type="submit" class="btn btn-warning precio precio">80 <i class="fa fa-diamond" aria-hidden="true"></i></button>
+              </form>
+            </div>
+
+            <p class="card-text text-justify">Ticket para acceder a un buffet libre organizado por nosotros</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="card">
+          <img class="card-img-top" src="/img/promotions/estatua.jpg" alt="Estatua Sullivan">
+          <div class="card-body">
+            <div class="d-flex justify-content-between">
+              <h5 class="card-title">Estatua Sullivan</h5>
+              <form method="post" asp-action="ComprarPromocion">
+                <input type="hidden" name="puntos" value="200" />
+                <button type="submit" class="btn btn-warning precio">200 <i class="fa fa-diamond" aria-hidden="true"></i></button>
+              </form>
+            </div>
+
+            <p class="card-text text-justify">Estatua de hamburguesa exclusiva para los mejores clientes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- fin promociones -->
+  }
 </div>
 <!-- best_burgers_area_end  -->
 <!-- features_room_startt -->
@@ -92,7 +140,7 @@
                         <span>15€</span>
                         <h3>Menú Presidente</h3>
                         <p>
-                            - Hamburguesa 100% pechuga marinada, jugosa y crujiente 200g montada sobre un pan con masa madre con cheddar, bacon, canónigos y rúcula, tomate y salsa.
+                            - Hamburguesa 100% pechuga marinada crujiente 200g sobre un pan con masa madre con cheddar, bacon y canónigos.
                         </p>
                         <p>
                             - Snack a elegir entre patatas caseras o croquetas.

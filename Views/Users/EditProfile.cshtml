@@ -54,7 +54,15 @@
               <div class="card-header" id="headingOne">
                 <h2 class="mb-0">
                   <button class="btn btn-link btn-block text-left text-decoration-none text-dark bigFontLess" type="button" data-toggle="collapse" data-target="#@pedido.Id-Collapse" aria-expanded="true" aria-controls="collapse">
-                    Pedido Nº @pedido.Id | @pedido.Fecha | @pedido.Estado
+                    Pedido Nº @pedido.Id | @pedido.Fecha  
+                    @if(pedido.Estado == "En camino")
+                    {
+                      <span class="badge badge-primary">En camino</span>
+                    } else if (pedido.Estado == "Entregado")
+                    {
+                      <span class="badge badge-success">Entregado</span>
+
+                    }
                   </button>
                 </h2>
               </div>

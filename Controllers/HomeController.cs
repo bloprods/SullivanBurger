@@ -142,6 +142,35 @@ namespace SullivanBurger.Controllers
       return RedirectToAction("Index");
     }
 
+    [HttpPost]
+    public IActionResult ComprarPromocion(int puntos)
+    {
+      string? jsonUsuario = _context.HttpContext.Session.GetString("Usuario");
+      Usuario? usuario;
+
+      if (jsonUsuario != null)
+      {
+        usuario = JsonSerializer.Deserialize<Usuario>(jsonUsuario);
+        if (usuario.Puntos >= puntos)
+        {
+          usuario.Puntos -= puntos;
+          _db.Usuarios.Update(usuario);
+          _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(usuario));
+          TempData["success"] = "Has realizado la compra de una promoción, será enviada a tu domicilio.";
+        }
+        else
+        {
+          TempData["error"] = "No tienes suficientes puntos para comprar la promoción.";
+        }
+
+        return RedirectToAction("Index");
+
+      }
+      TempData["error"] = "Ha ocurrido un error procesando la petición.";
+
+      return RedirectToAction("Index");
+    }
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
       public IActionResult Error()
       {

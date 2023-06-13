@@ -6,18 +6,19 @@ namespace SullivanBurger.Models
   public class Usuario
   {
     [Key]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "El campo Email se encuentra vacío")]
     [StringLength(100, MinimumLength = 10, ErrorMessage = "La longitud del email es incorrecta")]
     [DisplayName("Email")]
     public string Email { get; set; }
-    [Required]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "El campo Contraseña se encuentra vacío")]
     [StringLength(32, MinimumLength = 8, ErrorMessage = "La contraseña tiene que comprender entre 8 y 32 caracteres")]
     [DisplayName("Contraseña")]
     public string Password { get; set; }
-    [Required]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "El campo Nombre se encuentra vacío")]
     [StringLength(30, ErrorMessage = "El nombre introducido supera 30 caracteres")]
     [DisplayName("Nombre")]
     public string Nombre { get; set; }
-    [Required]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "El campo Apellidos se encuentra vacío")]
     [StringLength(60, ErrorMessage = "Los apellidos superan los 60 caracteres")]
     [DisplayName("Apellidos")]
     public string Apellidos { get; set; }

@@ -40,9 +40,18 @@
               @Html.DisplayFor(modelItem => obj.Fecha)
             </td>
             <td>
-              @Html.DisplayFor(modelItem => obj.Estado)
+              @if (obj.Estado == "En camino")
+              {
+                <span class="badge badge-primary">@Html.DisplayFor(modelItem => obj.Estado)</span>
+              }
+              else if (obj.Estado == "Entregado")
+              {
+                <span class="badge badge-success">@Html.DisplayFor(modelItem => obj.Estado)</span>
+
+              }
             </td>
             <td>
+              
               @Html.DisplayFor(modelItem => obj.Tipo)
             </td>
             <td>

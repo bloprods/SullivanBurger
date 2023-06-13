@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\promotions\" />
     <Folder Include="wwwroot\img\products\complementos\" />
     <Folder Include="wwwroot\img\products\bebidas\" />
     <Folder Include="wwwroot\img\products\burgerHD\" />
