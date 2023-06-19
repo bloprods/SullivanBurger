@@ -199,6 +199,8 @@ namespace SullivanBurger.Controllers
           _db.Update(userFromDb);
           await _db.SaveChangesAsync();
           TempData["success"] = "Los cambios de tu perfil se han guardado";
+          _context.HttpContext.Session.SetString("Usuario", JsonSerializer.Serialize(userFromDb));
+
 
         }
         catch (DbUpdateConcurrencyException)
@@ -247,6 +249,7 @@ namespace SullivanBurger.Controllers
       var usuario = await _db.Usuarios.FindAsync(id);
       if (usuario != null)
       {
+        await _db.Pedidos.Where(p => p.Email == usuario.Email).ForEachAsync(item => item.Email = null);
         _db.Usuarios.Remove(usuario);
       }
 
