@@ -22,7 +22,7 @@
   </div>
   <div class="mb-3">
     <label asp-for="Precio"></label>
-    <input type="number" step=".01" asp-for="Precio" class="form-control" />
+    <input type="number" step=".01" asp-for="Precio" class="form-control" value="-1" />
     <span asp-validation-for="Precio" class="text-danger"></span>
   </div>
   <div class="mb-3">
@@ -42,7 +42,7 @@
   </div>
   <div class="mb-3">
     <label asp-for="Stock"></label>
-    <input type="number" asp-for="Stock" class="form-control" />
+    <input type="number" asp-for="Stock" class="form-control" value="-1"/>
     <span asp-validation-for="Stock" class="text-danger"></span>
   </div>
   <div class="mb-3">

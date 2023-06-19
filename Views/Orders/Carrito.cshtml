@@ -21,7 +21,7 @@
         <input type="radio" class="form-check-input" name="tipo" value="domicilio" required>A domicilio
       </label>
     </div>
-    @if (ViewBag.userLogeado == null)
+    @if (ViewBag.userLogeado == null || ViewBag.userLogeado.Direccion == null)
     {
       <div class="form-group">
         <label for="direccion" class="h5">Dirección</label>
